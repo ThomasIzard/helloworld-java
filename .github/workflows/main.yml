@@ -33,11 +33,11 @@ jobs:
         env:
           MAVEN_OPTS: "-Dmaven.repo.local=~/.m2/repository"
 
-      - name: Nenommer et sauvegarder JAR artefact
+      - name: Renommer et sauvegarder JAR artefact
         run: mv target/*.jar target/helloworld-${{ env.PROJECT_VERSION }}.jar
 
-      - name: Upload artefact
-        uses: actions/upload-artifact@v3
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v4.4.3
         with:
           name: helloworld-jar
           path: target/helloworld-${{ env.PROJECT_VERSION }}.jar
@@ -59,7 +59,7 @@ jobs:
     steps:
 
       - name: Telecharger artefact
-        uses: actions/download-artifact@v3
+        uses: actions/download-artifact@v4.1.8
         with:
           name: helloworld-jar
           path: ./deployments
