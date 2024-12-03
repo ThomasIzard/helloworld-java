@@ -25,13 +25,13 @@ jobs:
       - name: Cache
         uses: actions/cache@v4.1.2
         with:
-          path: ${{ gitlab.workspace }}/.m2/repository
+          path: ${{ github.workspace }}/.m2/repository
           key: ${{ runner.os }}-maven-${{ hashFiles('""/pom.xml') }}
 
       - name: Build le JAR
         run: mvn clean package -DskipTests
         env:
-          MAVEN_OPTS: "-Dmaven.repo.local=~/.m2/repository"
+          MAVEN_OPTS: "-Dmaven.repo.local=${{ github.workspace }}/.m2/repository"
 
       - name: Renommer et sauvegarder JAR artefact
         run: mv target/*.jar target/helloworld-${{ env.PROJECT_VERSION }}.jar
