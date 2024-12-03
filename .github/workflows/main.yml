@@ -44,6 +44,8 @@ jobs:
           
   tests:
     runs-on: ubuntu-latest
+    needs:
+      - build
     steps:
       - name: Run tests
         run: mvn test
@@ -54,7 +56,6 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     needs: 
-      - build
       - tests
     steps:
 
